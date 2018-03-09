@@ -22,10 +22,10 @@ public class ChicagoSuburbGenerator {
         List<string> listA = new List<string>() { "Forest" , "Oak" , "Grove" , "Maple" };
 
         //assorted geographical features
-        List<string> listB = new List<string>() { "Park" , "Lake" , "Ridge" , "Glen" , "Heights" , "Bluff" };
+        List<string> listB = new List<string>() { "Park" , "Lake" , "Ridge" , "Brook" , "River" , "Field" , "Glen" , "Heights" , "Hills" , "Meadows" , "Bluff" };
 
-        //dorky-sounding names and misc.
-        List<string> listC = new List<string>() { "Morton" , "Myron" , "Vernon" , "Bartholomew" , "Barton" , "Quincy" , "Buffalo" , "Highland" };
+        //old-timey names and misc.
+        List<string> listC = new List<string>() { "Bartholomew" , "Barton" , "Downers" , "Grays" , "Lincoln" , "Morton" , "Morgan" , "Myron" , "Quincy" , "Tinley" , "Vernon" , "Buffalo" , "Deer" , "Highland" , "Orland" };
 
         nameLists.Add( 0 , listA );
         nameLists.Add( 1 , listB );
