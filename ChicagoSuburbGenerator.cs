@@ -1,53 +1,39 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 public class ChicagoSuburbGenerator {
 
-    Dictionary<int , List<string>> nameLists = new Dictionary<int , List<string>>();
-
-    public string currName;
-
     //we'll need to call this on initialization to fill up nameLists and get our first name in currName
-    public void callFirst () {
-
-        createLists();
-        makeName();
+    public void Main () {
+		var seed = createLists(); 
+		
+        Console.Write(makeName(seed));
     }
 
     //here's where we fill up nameLists
-    void createLists () {
+    List<List<string>> createLists () {
 
         //tree-related words
-        List<string> listA = new List<string>() { "Forest" , "Oak" , "Grove" , "Maple" };
-
-        //assorted geographical features
-        List<string> listB = new List<string>() { "Park" , "Lake" , "Ridge" , "Brook" , "River" , "Field" , "Glen" , "Heights" , "Hills" , "Meadows" , "Bluff" };
-
-        //old-timey names and misc.
-        List<string> listC = new List<string>() { "Bartholomew" , "Barton" , "Downers" , "Grays" , "Lincoln" , "Morton" , "Morgan" , "Myron" , "Quincy" , "Tinley" , "Vernon" , "Buffalo" , "Deer" , "Highland" , "Orland" };
-
-        nameLists.Add( 0 , listA );
-        nameLists.Add( 1 , listB );
-        nameLists.Add( 2 , listC );
-
-    }
+		return new List<List<string>> {	
+			//trees
+			new List<string>() { "Forest" , "Oak" , "Grove" , "Maple" } ,
+			//geographic
+				new List<string>() { "Park", "Lake" , "Ridge" , "Brook" , "River" , "Field" , "Glen" , "Heights" , "Hills" , "Meadows" , "Bluff" },
+			//old-timey names and misc.
+			new List<string>() { "Bartholomew" , "Barton" , "Downers" , "Grays" , "Lincoln" , "Morton" , "Morgan" , "Myron" , "Quincy" , "Tinley" , "Vernon" , "Buffalo" , "Deer" , "Highland" , "Orland" } };
+	}
 
     //and here's where we actually cobble together a new name, then stick it in currName
-    public string makeName () {
-
-        int listNum1 = (int) Mathf.Floor( Random.Range( 0 , 3 ) );  //pick any list for the first part
-        int listNum2 = (int) Mathf.Floor( Random.Range( 0 , 2 ) );  //pick only lists A or B for the second
-
-        int list1Count = nameLists[ listNum1 ].Count;
-        int list2Count = nameLists[ listNum2 ].Count;
-
-        string firstPart = nameLists[ listNum1 ][ (int) Mathf.Floor( Random.Range( 0 , list1Count ) ) ];    //pull a string at random from the first list
-        string secondPart = nameLists[ listNum2 ][ (int) Mathf.Floor( Random.Range( 0 , list2Count ) ) ];   //pull a string at random from the second list
-
-        currName = firstPart + " " + secondPart;
-        
-        return currname;
+    public string makeName (List<List<string>> seed) {
+		var rnd = new Random();
+		
+		var secondSeed = rnd.Next(2); 
+		var temp = new List<int>() {2, Math.Abs(secondSeed-1)};
+		
+		var list1 = seed[temp[rnd.Next(2)]];
+		var list2 = seed[secondSeed]; 
+		
+		return String.Format("{0} {1}", list1[rnd.Next(list1.Count)],  list2[rnd.Next(list2.Count)]);  
     }
 
 }
